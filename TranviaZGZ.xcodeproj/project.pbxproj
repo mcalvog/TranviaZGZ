@@ -15,6 +15,9 @@
 		8D7BA0292751312500D1D0E1 /* TranviaZGZ.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 8D7BA0272751312500D1D0E1 /* TranviaZGZ.xcdatamodeld */; };
 		8D7BA04C27515BDF00D1D0E1 /* MapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D7BA04B27515BDF00D1D0E1 /* MapView.swift */; };
 		8D7BA04E2751617400D1D0E1 /* FavoriteListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D7BA04D2751617400D1D0E1 /* FavoriteListView.swift */; };
+		8DA82B4E275942D7007BA8E2 /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DA82B4D275942D7007BA8E2 /* LocationManager.swift */; };
+		8DA82B512759756E007BA8E2 /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DA82B502759756E007BA8E2 /* LoadingView.swift */; };
+		8DA82B54275978F7007BA8E2 /* View+Hidden.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DA82B53275978F7007BA8E2 /* View+Hidden.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -27,6 +30,9 @@
 		8D7BA0282751312500D1D0E1 /* TranviaZGZ.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = TranviaZGZ.xcdatamodel; sourceTree = "<group>"; };
 		8D7BA04B27515BDF00D1D0E1 /* MapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapView.swift; sourceTree = "<group>"; };
 		8D7BA04D2751617400D1D0E1 /* FavoriteListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteListView.swift; sourceTree = "<group>"; };
+		8DA82B4D275942D7007BA8E2 /* LocationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
+		8DA82B502759756E007BA8E2 /* LoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = "<group>"; };
+		8DA82B53275978F7007BA8E2 /* View+Hidden.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+Hidden.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -59,6 +65,9 @@
 		8D7BA01B2751312400D1D0E1 /* TranviaZGZ */ = {
 			isa = PBXGroup;
 			children = (
+				8DA82B52275978DF007BA8E2 /* Extensions */,
+				8DA82B4F27597553007BA8E2 /* Views */,
+				8DA82B4C275942D7007BA8E2 /* Utils */,
 				8D7BA01C2751312400D1D0E1 /* TranviaZGZApp.swift */,
 				8D7BA01E2751312400D1D0E1 /* ContentView.swift */,
 				8D7BA04B27515BDF00D1D0E1 /* MapView.swift */,
@@ -77,6 +86,30 @@
 				8D7BA0232751312500D1D0E1 /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		8DA82B4C275942D7007BA8E2 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				8DA82B4D275942D7007BA8E2 /* LocationManager.swift */,
+			);
+			path = Utils;
+			sourceTree = "<group>";
+		};
+		8DA82B4F27597553007BA8E2 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				8DA82B502759756E007BA8E2 /* LoadingView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		8DA82B52275978DF007BA8E2 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				8DA82B53275978F7007BA8E2 /* View+Hidden.swift */,
+			);
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -152,7 +185,10 @@
 				8D7BA0262751312500D1D0E1 /* Persistence.swift in Sources */,
 				8D7BA01F2751312400D1D0E1 /* ContentView.swift in Sources */,
 				8D7BA04E2751617400D1D0E1 /* FavoriteListView.swift in Sources */,
+				8DA82B54275978F7007BA8E2 /* View+Hidden.swift in Sources */,
+				8DA82B4E275942D7007BA8E2 /* LocationManager.swift in Sources */,
 				8D7BA04C27515BDF00D1D0E1 /* MapView.swift in Sources */,
+				8DA82B512759756E007BA8E2 /* LoadingView.swift in Sources */,
 				8D7BA01D2751312400D1D0E1 /* TranviaZGZApp.swift in Sources */,
 				8D7BA0292751312500D1D0E1 /* TranviaZGZ.xcdatamodeld in Sources */,
 			);
@@ -288,6 +324,7 @@
 				DEVELOPMENT_TEAM = TQ74MJP8DZ;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "We need your location in order to localize you in the map.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -317,6 +354,7 @@
 				DEVELOPMENT_TEAM = TQ74MJP8DZ;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "We need your location in order to localize you in the map.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
