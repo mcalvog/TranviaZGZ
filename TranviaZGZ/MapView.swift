@@ -8,19 +8,31 @@
 import SwiftUI
 import MapKit
 
+
+
 struct MapView: View {
     
-    @StateObject var locationManager = LocationManager()
+    @StateObject var mapViewModel = MapViewModel()
     
     @State var trackingMode: MapUserTrackingMode = .follow
     
     var body: some View {
         NavigationView {
             ZStack(alignment: .bottom) {
-                Map(coordinateRegion: $locationManager.region, showsUserLocation: true, userTrackingMode: $trackingMode)
+                Map(coordinateRegion: $mapViewModel.region, showsUserLocation: true, userTrackingMode: $trackingMode, annotationItems: mapViewModel.tramwayStops){ item in
+                    MapAnnotation(coordinate: CLLocationCoordinate2D(latitude: item.geometry.coordinates[1], longitude: item.geometry.coordinates[0]) ){
+                        
+                        NavigationLink(destination: StopDetailView(stopID: item.id)){
+                            Image("icon")
+                        }
+                    }
+                }
+                    .onAppear {
+                        mapViewModel.fetchTramwayStops()
+                    }
                 
                 Button(action: {
-                    locationManager.requestLocation()
+                    mapViewModel.requestLocation()
                 }) {
                     Image(systemName: "location.circle.fill")
                         .resizable()
@@ -34,7 +46,7 @@ struct MapView: View {
                     .padding(.bottom, 24)
                 
                 LoadingView()
-                    .isVisible($locationManager.isLoading)
+                    .isVisible($mapViewModel.isLoading)
             }
             .edgesIgnoringSafeArea(.top)
             .navigationBarHidden(true)

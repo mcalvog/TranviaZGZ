@@ -12,9 +12,14 @@ import SwiftUI
 
 // Adapted from: https://www.hackingwithswift.com/quick-start/swiftui/how-to-read-the-users-location-using-locationbutton
 
-class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
+class MapViewModel: NSObject, ObservableObject, CLLocationManagerDelegate {
     
     let locationManager = CLLocationManager()
+    
+    private let tramwayStopsURL : URL = URL( string: "https://www.zaragoza.es/sede/servicio/urbanismo-infraestructuras/transporte-urbano/parada-tranvia.json")!
+    
+    
+    @Published var tramwayStops = [NetworkStop]()
     
     @Published var region = MKCoordinateRegion(
         center: CLLocationCoordinate2D(latitude: 41.6563, longitude: -0.876566),
@@ -63,8 +68,28 @@ class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
         isLoading = false
     }
     
+    
+    func fetchTramwayStops(){
+        
+        isLoading = true
+        
+        URLSession.shared.dataTask(with: tramwayStopsURL) { data, response, error in
+            if let tramwayStopsData = data {
+                let tramwayStopsResponse = try! JSONDecoder().decode(NetworkStopsResponse.self, from: tramwayStopsData)
+                DispatchQueue.main.async {
+                    self.tramwayStops = tramwayStopsResponse.result
+                    print(self.tramwayStops)
+                    self.isLoading = false
+                }
+            }
+        }.resume()
+    }
+    
     private func setRegion(_ coordinate: CLLocationCoordinate2D) {
         region = MKCoordinateRegion(
             center: coordinate, latitudinalMeters: 200, longitudinalMeters: 200)
     }
+    
+    
+    
 }

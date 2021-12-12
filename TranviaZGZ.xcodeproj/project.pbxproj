@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8D40BAF62766594C00FA8874 /* NetworkTramwayStops.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D40BAF52766594C00FA8874 /* NetworkTramwayStops.swift */; };
+		8D40BAFA2766659D00FA8874 /* StopDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D40BAF92766659D00FA8874 /* StopDetailView.swift */; };
 		8D7BA01D2751312400D1D0E1 /* TranviaZGZApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D7BA01C2751312400D1D0E1 /* TranviaZGZApp.swift */; };
 		8D7BA01F2751312400D1D0E1 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D7BA01E2751312400D1D0E1 /* ContentView.swift */; };
 		8D7BA0212751312500D1D0E1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8D7BA0202751312500D1D0E1 /* Assets.xcassets */; };
@@ -15,12 +17,14 @@
 		8D7BA0292751312500D1D0E1 /* TranviaZGZ.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 8D7BA0272751312500D1D0E1 /* TranviaZGZ.xcdatamodeld */; };
 		8D7BA04C27515BDF00D1D0E1 /* MapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D7BA04B27515BDF00D1D0E1 /* MapView.swift */; };
 		8D7BA04E2751617400D1D0E1 /* FavoriteListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D7BA04D2751617400D1D0E1 /* FavoriteListView.swift */; };
-		8DA82B4E275942D7007BA8E2 /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DA82B4D275942D7007BA8E2 /* LocationManager.swift */; };
+		8DA82B4E275942D7007BA8E2 /* MapViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DA82B4D275942D7007BA8E2 /* MapViewModel.swift */; };
 		8DA82B512759756E007BA8E2 /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DA82B502759756E007BA8E2 /* LoadingView.swift */; };
 		8DA82B54275978F7007BA8E2 /* View+Hidden.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DA82B53275978F7007BA8E2 /* View+Hidden.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		8D40BAF52766594C00FA8874 /* NetworkTramwayStops.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkTramwayStops.swift; sourceTree = "<group>"; };
+		8D40BAF92766659D00FA8874 /* StopDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StopDetailView.swift; sourceTree = "<group>"; };
 		8D7BA0192751312400D1D0E1 /* TranviaZGZ.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TranviaZGZ.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8D7BA01C2751312400D1D0E1 /* TranviaZGZApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TranviaZGZApp.swift; sourceTree = "<group>"; };
 		8D7BA01E2751312400D1D0E1 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -30,7 +34,7 @@
 		8D7BA0282751312500D1D0E1 /* TranviaZGZ.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = TranviaZGZ.xcdatamodel; sourceTree = "<group>"; };
 		8D7BA04B27515BDF00D1D0E1 /* MapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapView.swift; sourceTree = "<group>"; };
 		8D7BA04D2751617400D1D0E1 /* FavoriteListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteListView.swift; sourceTree = "<group>"; };
-		8DA82B4D275942D7007BA8E2 /* LocationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
+		8DA82B4D275942D7007BA8E2 /* MapViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapViewModel.swift; sourceTree = "<group>"; };
 		8DA82B502759756E007BA8E2 /* LoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = "<group>"; };
 		8DA82B53275978F7007BA8E2 /* View+Hidden.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+Hidden.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -46,6 +50,22 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		8D40BAF32766590E00FA8874 /* Network */ = {
+			isa = PBXGroup;
+			children = (
+				8D40BAF42766592600FA8874 /* Model */,
+			);
+			path = Network;
+			sourceTree = "<group>";
+		};
+		8D40BAF42766592600FA8874 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				8D40BAF52766594C00FA8874 /* NetworkTramwayStops.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
 		8D7BA0102751312400D1D0E1 = {
 			isa = PBXGroup;
 			children = (
@@ -65,6 +85,7 @@
 		8D7BA01B2751312400D1D0E1 /* TranviaZGZ */ = {
 			isa = PBXGroup;
 			children = (
+				8D40BAF32766590E00FA8874 /* Network */,
 				8DA82B52275978DF007BA8E2 /* Extensions */,
 				8DA82B4F27597553007BA8E2 /* Views */,
 				8DA82B4C275942D7007BA8E2 /* Utils */,
@@ -76,6 +97,7 @@
 				8D7BA0252751312500D1D0E1 /* Persistence.swift */,
 				8D7BA0272751312500D1D0E1 /* TranviaZGZ.xcdatamodeld */,
 				8D7BA0222751312500D1D0E1 /* Preview Content */,
+				8D40BAF92766659D00FA8874 /* StopDetailView.swift */,
 			);
 			path = TranviaZGZ;
 			sourceTree = "<group>";
@@ -91,7 +113,7 @@
 		8DA82B4C275942D7007BA8E2 /* Utils */ = {
 			isa = PBXGroup;
 			children = (
-				8DA82B4D275942D7007BA8E2 /* LocationManager.swift */,
+				8DA82B4D275942D7007BA8E2 /* MapViewModel.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -182,11 +204,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8D40BAFA2766659D00FA8874 /* StopDetailView.swift in Sources */,
 				8D7BA0262751312500D1D0E1 /* Persistence.swift in Sources */,
 				8D7BA01F2751312400D1D0E1 /* ContentView.swift in Sources */,
 				8D7BA04E2751617400D1D0E1 /* FavoriteListView.swift in Sources */,
 				8DA82B54275978F7007BA8E2 /* View+Hidden.swift in Sources */,
-				8DA82B4E275942D7007BA8E2 /* LocationManager.swift in Sources */,
+				8D40BAF62766594C00FA8874 /* NetworkTramwayStops.swift in Sources */,
+				8DA82B4E275942D7007BA8E2 /* MapViewModel.swift in Sources */,
 				8D7BA04C27515BDF00D1D0E1 /* MapView.swift in Sources */,
 				8DA82B512759756E007BA8E2 /* LoadingView.swift in Sources */,
 				8D7BA01D2751312400D1D0E1 /* TranviaZGZApp.swift in Sources */,
