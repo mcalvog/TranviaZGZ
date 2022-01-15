@@ -6,12 +6,34 @@
 //
 
 import SwiftUI
+import CoreData
+
+
+
 
 struct FavoriteListView: View {
+    
+    @Environment(\.managedObjectContext) private var viewContext
+    
+    
+    @FetchRequest(entity: FavStop.entity(), sortDescriptors: [NSSortDescriptor(keyPath: \FavStop.title, ascending: true)]) var favorites: FetchedResults<FavStop>
+
+    
     var body: some View {
         NavigationView {
-            Text("Favoritos")
-                .navigationTitle("Favoritos")
+            List{
+                ForEach(favorites){ item in
+                    
+                    NavigationLink(destination:
+                                    StopDetailView(stopID: item.stopId!)
+                                    .navigationTitle(item.title?.capitalized ?? "")
+                    ){
+                        Text(item.title ?? "")
+                    }
+                    
+                }
+            }
+            .navigationTitle("Paradas Favoritas")
         }
     }
 }

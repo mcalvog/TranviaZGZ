@@ -7,6 +7,7 @@
 
 import SwiftUI
 import WebKit
+import CoreData
 
 struct StopDetailView: View {
     
@@ -20,6 +21,11 @@ struct StopDetailView: View {
     
     let stopID : String
     
+    
+    @Environment(\.managedObjectContext) private var viewContext
+    
+    @FetchRequest(entity: FavStop.entity(), sortDescriptors: [NSSortDescriptor(keyPath: \FavStop.title, ascending: true)]) var favorites: FetchedResults<FavStop>
+ 
     var body: some View {
         ZStack {
             VStack {
@@ -29,7 +35,7 @@ struct StopDetailView: View {
                         showShareMenu = true
                     } label: {
                         HStack {
-                            Text(destino.destino)
+                            Text("Destino: " + destino.destino.capitalized)
                                 .foregroundColor(.primary)
                             Spacer()
                             Text("\(destino.minutos) minutos")
@@ -77,7 +83,22 @@ struct StopDetailView: View {
         }.onAppear {
             getStopData()
         }.navigationBarItems(trailing: Button(action: {
-            print("Add to favorites...")
+            
+            if let favoriteStop = favorites.first(where: { $0.stopId == stopID } ){
+                viewContext.delete(favoriteStop)
+            }
+            else {
+                let favStop = FavStop(context : viewContext)
+                favStop.stopId = stopID
+                favStop.title = stop?.title ?? ""
+                do{
+                    try viewContext.save()
+                }
+                catch{
+                    //Error
+                }
+            }
+            
         }) {
             if stopsViewModel.isFavoriteStop(stopID) {
                 Image(systemName: "star.fill")
