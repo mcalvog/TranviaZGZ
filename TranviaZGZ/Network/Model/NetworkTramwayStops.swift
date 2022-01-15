@@ -26,7 +26,8 @@ struct NetworkStop: Codable, Identifiable {
 }
 
 // MARK: - NetworkDestino
-struct NetworkDestino: Codable {
+struct NetworkDestino: Codable, Identifiable {
+    var id: String { UUID().uuidString }
     let linea: String
     let destino: String
     let minutos: Int

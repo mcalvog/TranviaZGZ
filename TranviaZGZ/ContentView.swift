@@ -13,12 +13,11 @@ struct ContentView: View {
         TabView {
             MapView()
                 .tabItem {
-                    Label("Map", systemImage: "map")
+                    Label("Mapa", systemImage: "map")
                 }
-                .ignoresSafeArea()
             FavoriteListView()
                 .tabItem {
-                    Label("Favorites", systemImage: "star")
+                    Label("Favoritos", systemImage: "star")
                 }
         }
     }
