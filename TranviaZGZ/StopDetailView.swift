@@ -82,10 +82,13 @@ struct StopDetailView: View {
                 .isVisible($isLoading)
         }.onAppear {
             getStopData()
+            isFavorite = (favorites.first(where: { $0.stopId == stopID } ) != nil)
+            
         }.navigationBarItems(trailing: Button(action: {
             
             if let favoriteStop = favorites.first(where: { $0.stopId == stopID } ){
                 viewContext.delete(favoriteStop)
+                isFavorite = false
             }
             else {
                 let favStop = FavStop(context : viewContext)
@@ -93,6 +96,7 @@ struct StopDetailView: View {
                 favStop.title = stop?.title ?? ""
                 do{
                     try viewContext.save()
+                    isFavorite = true
                 }
                 catch{
                     //Error
@@ -100,7 +104,7 @@ struct StopDetailView: View {
             }
             
         }) {
-            if stopsViewModel.isFavoriteStop(stopID) {
+            if isFavorite {
                 Image(systemName: "star.fill")
             } else {
                 Image(systemName: "star")

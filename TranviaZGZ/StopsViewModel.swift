@@ -6,13 +6,18 @@
 //
 
 import Foundation
+import CoreData
+
+
 
 class StopsViewModel: NSObject, ObservableObject {
     
     @Published var tramwayStops = [NetworkStop]()
     @Published var isLoading = false
     
+    
     private let apiClient = ApiClient()
+    
     
     func fetchTramwayStops(){
         if !tramwayStops.isEmpty {
