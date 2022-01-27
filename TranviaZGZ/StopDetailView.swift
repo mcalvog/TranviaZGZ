@@ -11,42 +11,46 @@ import CoreData
 
 struct StopDetailView: View {
     
-    @StateObject var stopsViewModel = StopsViewModel()
-    @State var isLoading = false
-    @State var isFavorite = false
-    @State var stop: NetworkStop? = nil
+    @StateObject private var stopsViewModel = StopsViewModel()
+    
+    @State private var isLoading = false
+    @State private var showErrorAlert = false
+    @State private var isFavorite = false
+    @State private var stop: NetworkStop? = nil
     
     @State private var showShareMenu = false
     @State private var selectedDestino: NetworkDestino? = nil
     
     let stopID : String
     
-    
     @Environment(\.managedObjectContext) private var viewContext
     
     @FetchRequest(entity: FavStop.entity(), sortDescriptors: [NSSortDescriptor(keyPath: \FavStop.title, ascending: true)]) var favorites: FetchedResults<FavStop>
- 
+    
     var body: some View {
         ZStack {
             VStack {
-                List(stop?.destinos ?? []) { destino in
-                    Button {
-                        selectedDestino = destino
-                        showShareMenu = true
-                    } label: {
-                        HStack {
-                            Text("Destino: " + destino.destino.capitalized)
-                                .foregroundColor(.primary)
-                            Spacer()
-                            Text("\(destino.minutos) minutos")
-                                .padding(.init(top: 5, leading: 10, bottom: 5, trailing: 10))
-                                .background(Color.red)
-                                .foregroundColor(.white)
-                                .font(.footnote)
-                                .cornerRadius(5)
+                List {
+                    Section(header: Text("Destinos")) {
+                        ForEach(stop?.destinos ?? []) { destino in
+                            Button {
+                                selectedDestino = destino
+                                showShareMenu = true
+                            } label: {
+                                HStack {
+                                    Text(destino.destino)
+                                        .foregroundColor(.primary)
+                                    Spacer()
+                                    Text("\(destino.minutos) minutos")
+                                        .padding(.init(top: 5, leading: 10, bottom: 5, trailing: 10))
+                                        .background(Color.red)
+                                        .foregroundColor(.white)
+                                        .font(.footnote)
+                                        .cornerRadius(5)
+                                }
+                            }
                         }
                     }
-
                 }.refreshable {
                     getStopData()
                 }
@@ -86,21 +90,8 @@ struct StopDetailView: View {
             
         }.navigationBarItems(trailing: Button(action: {
             
-            if let favoriteStop = favorites.first(where: { $0.stopId == stopID } ){
-                viewContext.delete(favoriteStop)
-                isFavorite = false
-            }
-            else {
-                let favStop = FavStop(context : viewContext)
-                favStop.stopId = stopID
-                favStop.title = stop?.title ?? ""
-                do{
-                    try viewContext.save()
-                    isFavorite = true
-                }
-                catch{
-                    //Error
-                }
+            if let selectedStop = stop {
+                isFavorite = stopsViewModel.toggleFavoriteStop(favorites: favorites, stop: selectedStop)
             }
             
         }) {
@@ -109,7 +100,10 @@ struct StopDetailView: View {
             } else {
                 Image(systemName: "star")
             }
-        })
+        }).alert(
+            isPresented: $showErrorAlert,
+            content: { Alert(title: Text("Ha ocurrido un error al cargar la parada.")) }
+        )
             .navigationBarTitleDisplayMode(.inline)
     }
     
@@ -122,6 +116,8 @@ struct StopDetailView: View {
                 stop = data
             case .error(let error):
                 isLoading = false
+                showErrorAlert = true
+                
                 print(error.localizedDescription)
             }
         }

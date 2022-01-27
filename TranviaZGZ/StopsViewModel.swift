@@ -7,48 +7,42 @@
 
 import Foundation
 import CoreData
-
+import SwiftUI
 
 
 class StopsViewModel: NSObject, ObservableObject {
     
-    @Published var tramwayStops = [NetworkStop]()
-    @Published var isLoading = false
-    
+    private var viewContext: NSManagedObjectContext
     
     private let apiClient = ApiClient()
     
+    override init() {
+        self.viewContext = PersistenceController.shared.container.viewContext
+    }
     
-    func fetchTramwayStops(){
-        if !tramwayStops.isEmpty {
-            return
-        }
-        
-        isLoading = true
-        
-        getNetworkStops { response in
-            switch response {
-            case .success(let data):
-                self.isLoading = false
-                self.tramwayStops = data.result
-            case .error(let error):
-                self.isLoading = false
-                print(error.localizedDescription)
-            }
-        }
+    func getNetworkStops(completion: @escaping (Result<NetworkStopsResponse>) -> Void) {
+        apiClient.getData("parada-tranvia.json", completion: completion)
     }
     
     func getNetworkStop(_ id: String, completion: @escaping (Result<NetworkStop>) -> Void) {
         apiClient.getData("parada-tranvia/\(id).json", completion: completion)
     }
     
-    func isFavoriteStop(_ id: String) -> Bool {
-        // Recorrer array
-        false
-    }
-    
-    private func getNetworkStops(completion: @escaping (Result<NetworkStopsResponse>) -> Void) {
-        apiClient.getData("parada-tranvia.json", completion: completion)
+    func toggleFavoriteStop(favorites: FetchedResults<FavStop>, stop: NetworkStop) -> Bool {
+        if let favoriteStop = favorites.first(where: { $0.stopId == stop.id } ) {
+            // Remove from favorites
+            viewContext.delete(favoriteStop)
+            try? viewContext.save()
+            return false
+        } else {
+            // Add to favorites
+            let favStop = FavStop(context : viewContext)
+            favStop.stopId = stop.id
+            favStop.title = stop.title
+            
+            try? viewContext.save()
+            return true
+        }
     }
     
 }

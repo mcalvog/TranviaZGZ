@@ -10,15 +10,18 @@ import MapKit
 
 struct MapView: View {
     
-    @StateObject var mapViewModel = MapViewModel()
-    @StateObject var stopsViewModel = StopsViewModel()
+    @StateObject private var mapViewModel = MapViewModel()
+    @StateObject private var stopsViewModel = StopsViewModel()
     
-    @State var trackingMode: MapUserTrackingMode = .follow
+    @State private var isLoading = false
+    @State private var showErrorAlert = false
+    @State private var trackingMode: MapUserTrackingMode = .follow
+    @State private var tramwayStops = [NetworkStop]()
     
     var body: some View {
         NavigationView {
             ZStack(alignment: .bottom) {
-                Map(coordinateRegion: $mapViewModel.region, showsUserLocation: true, userTrackingMode: $trackingMode, annotationItems: stopsViewModel.tramwayStops) { item in
+                Map(coordinateRegion: $mapViewModel.region, showsUserLocation: true, userTrackingMode: $trackingMode, annotationItems: tramwayStops) { item in
                     MapAnnotation(coordinate: CLLocationCoordinate2D(latitude: item.geometry.coordinates[1], longitude: item.geometry.coordinates[0])) {
                         NavigationLink(destination:
                                         StopDetailView(stopID: item.id)
@@ -29,7 +32,7 @@ struct MapView: View {
                     }
                 }
                 .onAppear {
-                    stopsViewModel.fetchTramwayStops()
+                    getTramwayStops()
                 }
                 
                 Button(action: {
@@ -47,17 +50,41 @@ struct MapView: View {
                     .padding(.bottom, 24)
                 
                 LoadingView()
-                    .isVisible(isLoading())
+                    .isVisible(isLoadingContent())
             }
             .navigationTitle("Mapa")
             .navigationBarHidden(true)
             .edgesIgnoringSafeArea(.top)
-        }
-        .navigationViewStyle(.stack)
+        }.alert(
+            isPresented: $showErrorAlert,
+            content: { Alert(title: Text("Ha ocurrido un error al cargar las paradas.")) }
+        )
+            .navigationViewStyle(.stack)
     }
     
-    private func isLoading() -> Binding<Bool> {
-        return Binding<Bool>(get: { mapViewModel.isLoading || stopsViewModel.isLoading }, set: { _ in })
+    private func getTramwayStops() {
+        if !tramwayStops.isEmpty {
+            return
+        }
+        
+        isLoading = true
+        
+        stopsViewModel.getNetworkStops { response in
+            switch response {
+            case .success(let data):
+                isLoading = false
+                tramwayStops = data.result
+            case .error(let error):
+                isLoading = false
+                showErrorAlert = true
+                
+                print(error.localizedDescription)
+            }
+        }
+    }
+    
+    private func isLoadingContent() -> Binding<Bool> {
+        return Binding<Bool>(get: { mapViewModel.isLoading || isLoading }, set: { _ in })
     }
 }
 

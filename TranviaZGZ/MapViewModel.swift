@@ -21,14 +21,14 @@ class MapViewModel: NSObject, ObservableObject, CLLocationManagerDelegate {
     @Published var isLoading = false
     
     private let locationManager = CLLocationManager()
-
+    
     override init() {
         super.init()
         
         locationManager.delegate = self
         locationManager.requestWhenInUseAuthorization()
     }
-
+    
     func requestLocation() {
         if let coordinate = locationManager.location?.coordinate {
             // We already have user location
@@ -49,7 +49,7 @@ class MapViewModel: NSObject, ObservableObject, CLLocationManagerDelegate {
             break
         }
     }
-
+    
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         if let coordinate = locations.first?.coordinate {
             setRegion(coordinate)
