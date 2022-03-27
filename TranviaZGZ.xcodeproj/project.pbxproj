@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		8D40BAF62766594C00FA8874 /* NetworkTramwayStops.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D40BAF52766594C00FA8874 /* NetworkTramwayStops.swift */; };
 		8D40BAFA2766659D00FA8874 /* StopDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D40BAF92766659D00FA8874 /* StopDetailView.swift */; };
+		8D46239A27F09DD0009FD35C /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8D46239927F09DD0009FD35C /* CloudKit.framework */; };
 		8D7BA01D2751312400D1D0E1 /* TranviaZGZApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D7BA01C2751312400D1D0E1 /* TranviaZGZApp.swift */; };
 		8D7BA01F2751312400D1D0E1 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D7BA01E2751312400D1D0E1 /* ContentView.swift */; };
 		8D7BA0212751312500D1D0E1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8D7BA0202751312500D1D0E1 /* Assets.xcassets */; };
@@ -29,6 +30,8 @@
 /* Begin PBXFileReference section */
 		8D40BAF52766594C00FA8874 /* NetworkTramwayStops.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkTramwayStops.swift; sourceTree = "<group>"; };
 		8D40BAF92766659D00FA8874 /* StopDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StopDetailView.swift; sourceTree = "<group>"; };
+		8D46239727F09D96009FD35C /* TranviaZGZ.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = TranviaZGZ.entitlements; sourceTree = "<group>"; };
+		8D46239927F09DD0009FD35C /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
 		8D7BA0192751312400D1D0E1 /* TranviaZGZ.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TranviaZGZ.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8D7BA01C2751312400D1D0E1 /* TranviaZGZApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TranviaZGZApp.swift; sourceTree = "<group>"; };
 		8D7BA01E2751312400D1D0E1 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -52,6 +55,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8D46239A27F09DD0009FD35C /* CloudKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -76,11 +80,20 @@
 			path = Model;
 			sourceTree = "<group>";
 		};
+		8D46239827F09DD0009FD35C /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				8D46239927F09DD0009FD35C /* CloudKit.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		8D7BA0102751312400D1D0E1 = {
 			isa = PBXGroup;
 			children = (
 				8D7BA01B2751312400D1D0E1 /* TranviaZGZ */,
 				8D7BA01A2751312400D1D0E1 /* Products */,
+				8D46239827F09DD0009FD35C /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -95,6 +108,7 @@
 		8D7BA01B2751312400D1D0E1 /* TranviaZGZ */ = {
 			isa = PBXGroup;
 			children = (
+				8D46239727F09D96009FD35C /* TranviaZGZ.entitlements */,
 				8D40BAF32766590E00FA8874 /* Network */,
 				8DA82B52275978DF007BA8E2 /* Extensions */,
 				8DA82B4F27597553007BA8E2 /* Views */,
@@ -358,10 +372,11 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = TranviaZGZ/TranviaZGZ.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"TranviaZGZ/Preview Content\"";
-				DEVELOPMENT_TEAM = TQ74MJP8DZ;
+				DEVELOPMENT_TEAM = RDV2KJUFH7;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "We need your location in order to localize you in the map.";
@@ -375,7 +390,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.marcos2.TranviaZGZ;
+				PRODUCT_BUNDLE_IDENTIFIER = es.usj.learningCloudKit;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -388,10 +403,11 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = TranviaZGZ/TranviaZGZ.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"TranviaZGZ/Preview Content\"";
-				DEVELOPMENT_TEAM = TQ74MJP8DZ;
+				DEVELOPMENT_TEAM = RDV2KJUFH7;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "We need your location in order to localize you in the map.";
@@ -405,7 +421,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.marcos2.TranviaZGZ;
+				PRODUCT_BUNDLE_IDENTIFIER = es.usj.learningCloudKit;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
